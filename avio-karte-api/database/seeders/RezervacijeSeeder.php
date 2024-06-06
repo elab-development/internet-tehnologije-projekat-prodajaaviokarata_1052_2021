@@ -17,7 +17,7 @@ class RezervacijeSeeder extends Seeder
 
 
 
-        for ($j = 1; $j <= 10000; $j++) {
+        for ($j = 1; $j <= 1000; $j++) {
 
             $letId = $faker->numberBetween(1, 1000);
             $userId = $faker->numberBetween(1, 10);

@@ -11,7 +11,7 @@ class Rezervacija extends Model
 
     public const STATUS_REZERVISANO = 'REZERVISANO';
     public const STATUS_OTKAZANO = 'OTKAZANO';
-
+    public const STATUS_NOVO = 'NOVO';
     protected $table = 'rezervacije';
 
     protected $fillable = [

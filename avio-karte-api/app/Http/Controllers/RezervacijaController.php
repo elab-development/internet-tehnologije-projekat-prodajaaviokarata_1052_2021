@@ -92,4 +92,43 @@ class RezervacijaController extends AbstractController
         $rezervacija->delete();
         return $this->uspesanOdgovor(new RezervacijaResurs($rezervacija));
     }
+
+    public function otkaziRezervaciju($id)
+    {
+        $rezervacija = Rezervacija::find($id);
+        if ($rezervacija == null) {
+            return $this->neuspesanOdgovor("Rezervacija nije pronadjena");
+        }
+        $rezervacija->status = Rezervacija::STATUS_OTKAZANO;
+        $rezervacija->save();
+        return $this->uspesanOdgovor(new RezervacijaResurs($rezervacija));
+    }
+    //potvrdi rezervaciju
+    public function rezervisiRezervaciju($id)
+    {
+        $rezervacija = Rezervacija::find($id);
+        if ($rezervacija == null) {
+            return $this->neuspesanOdgovor("Rezervacija nije pronadjena");
+        }
+        $rezervacija->status = Rezervacija::STATUS_REZERVISANO;
+        $rezervacija->save();
+        return $this->uspesanOdgovor(new RezervacijaResurs($rezervacija));
+    }
+    
+    public function rezervacijeKorisnika($id)
+    {
+        $rezervacije = Rezervacija::where('user_id', $id)->get();
+        return $this->uspesanOdgovor(RezervacijaResurs::collection($rezervacije));
+    }
+    
+    //paginate
+    
+    public function paginate(Request $request)
+    {
+        $perPage = $request->perPage ?? 10;
+        
+        $rezervacije = Rezervacija::paginate($perPage);
+        return $this->uspesanOdgovor($rezervacije);
+    }
+
 }
