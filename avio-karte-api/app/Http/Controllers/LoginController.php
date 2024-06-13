@@ -34,15 +34,17 @@ class LoginController extends AbstractController
         ]);
 
         if ($validator->fails()){
-            $this->neuspesanOdgovor('Greska pri validaciji', $validator->errors());
+            return $this->neuspesanOdgovor('Greska pri validaciji', $validator->errors());
         }
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->role = 'user';
+        $user->save();
 
-        $this->uspesanOdgovor([
+       return $this->uspesanOdgovor([
             'user' => new UserResurs($user),
             'poruka' => 'Uspesno ste se registrovali. Sada se mozete prijaviti.'
         ]);
