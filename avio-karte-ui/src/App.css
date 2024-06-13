@@ -39,11 +39,7 @@
 
 body {
   background-image: url("./slike/background.webp");
-  overflow: hidden;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
     background-color: #000;
     margin: 0;
     padding: 0;
@@ -71,4 +67,23 @@ body {
 
 .naslov p {
     font-size: 1.2rem;
+}
+
+.glavni {
+  color: #000;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+footer {
+  background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 1rem;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+  margin: 10px;
 }

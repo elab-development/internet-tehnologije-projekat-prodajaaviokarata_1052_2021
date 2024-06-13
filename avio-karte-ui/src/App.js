@@ -8,12 +8,13 @@ import Home from "./stranice/Home";
 import ONama from "./stranice/ONama";
 import Letovi from "./stranice/Letovi";
 import Login from "./stranice/Login";
+import Footer from "./komponente/Footer";
 
 function App() {
   return (
     <>
         <Navigacija />
-        <Container>
+        <Container className="wrapper">
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -23,6 +24,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
       </Container>
+        <Footer />
     </>
   );
 }
