@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-image: url("./slike/background.webp");
+  overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.naslov {
+  display: flex;
+    align-items: center;
+  flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 300px;
+}
+
+.naslov h1 {
+  font-weight: bold;
+}
+
+.naslov p {
+    font-size: 1.2rem;
+}
