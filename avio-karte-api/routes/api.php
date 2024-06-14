@@ -27,5 +27,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('rezervacije-korisnika/{id}', 'App\Http\Controllers\RezervacijaController@rezervacijeKorisnika');
     Route::get('grafik', 'App\Http\Controllers\LetController@grafik');
+    Route::get('nove-rezervacije', 'App\Http\Controllers\RezervacijaController@vratiNoveRezervacije');
+
 
 });

@@ -130,5 +130,10 @@ class RezervacijaController extends AbstractController
         $rezervacije = Rezervacija::paginate($perPage);
         return $this->uspesanOdgovor($rezervacije);
     }
+    public function vratiNoveRezervacije(Request $request)
+    {
+        $rezervacije = Rezervacija::where('status', Rezervacija::STATUS_NOVO)->get();
+        return $this->uspesanOdgovor(RezervacijaResurs::collection($rezervacije));
+    }
 
 }
