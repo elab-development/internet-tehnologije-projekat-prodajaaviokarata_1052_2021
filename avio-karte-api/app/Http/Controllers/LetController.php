@@ -6,6 +6,7 @@ use App\Http\Resources\LetResurs;
 use App\Models\Let;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class LetController extends AbstractController
 {
@@ -106,5 +107,15 @@ class LetController extends AbstractController
 
         $let->delete();
         return $this->uspesanOdgovor(new LetResurs($let));
+    }
+    public function grafik(Request $request)
+    {
+        $letovi = DB::table('letovi')
+            ->select('aerodromi.naziv', DB::raw('count(*) as broj_letova'))
+            ->join('aerodromi', 'letovi.aerodrom_polazak_id', '=', 'aerodromi.id')
+            ->groupBy('aerodromi.naziv')
+            ->get();
+
+        return $this->uspesanOdgovor($letovi);
     }
 }
