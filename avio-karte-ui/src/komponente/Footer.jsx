@@ -1,33 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FaAddressBook, FaHeart, FaPhone} from "react-icons/fa";
 import {FaPencil} from "react-icons/fa6";
 import axios from "axios";
 
 const Footer = () => {
-    
-    const [vreme, setVreme] = React.useState(<></>);
 
-    // setTimeout(() => {
-    //     axios.get('http://worldtimeapi.org/api/timezone/Europe/Belgrade').then(res => {
-    //         console.log(res.data);
-    //         let utcDatetime = res.data.utc_datetime;
-    //         let date = new Date(utcDatetime);
+    const [vreme, setVreme] = React.useState("");
 
-    //         let hours = date.getHours();
-    //         let minutes = date.getMinutes();
-    //         let seconds = date.getSeconds();
-    //         let day = date.getDate();
-    //         let month = date.getMonth();
-    //         let year = date.getFullYear();
-    //         let formattedDate = <>
-    //             <p className="text-center">{day}.{month}.{year}</p>
-    //             <p className="text-center">{hours}:{minutes}:{seconds}</p>
-    //         </>;
-    //         console.log(formattedDate);
+    useEffect(() => {
+        axios.get("http://worldtimeapi.org/api/timezone/Europe/Belgrade")
+            .then(res => {
+                let formatedDate = new Date(res.data.datetime);
+                //date format dd.mm.yyyy
+                let formatedString = formatedDate.getDate() + "." + (formatedDate.getMonth() + 1) + "." + formatedDate.getFullYear();
 
-    //         setVreme(formattedDate);
-    //     });
-    // }, 1000);
+                setVreme(formatedString);
+            }).catch(err => {
+            console.log(err);
+        })
+
+    }, []);
 
 
     return (
