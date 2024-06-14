@@ -110,8 +110,13 @@ class RezervacijaController extends AbstractController
         if ($rezervacija == null) {
             return $this->neuspesanOdgovor("Rezervacija nije pronadjena");
         }
+        $let = $rezervacija->let;
+
+        $let->broj_karata = $let->broj_karata - 1;
+        $let->save();
         $rezervacija->status = Rezervacija::STATUS_REZERVISANO;
         $rezervacija->save();
+       
         return $this->uspesanOdgovor(new RezervacijaResurs($rezervacija));
     }
     
