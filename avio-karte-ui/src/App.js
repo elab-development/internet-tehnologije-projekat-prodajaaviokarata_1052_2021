@@ -9,6 +9,8 @@ import ONama from "./stranice/ONama";
 import Letovi from "./stranice/Letovi";
 import Login from "./stranice/Login";
 import Footer from "./komponente/Footer";
+import MojiLetovi from './stranice/MojiLetovi';
+import Admin from './stranice/Admin';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
                     <Route path="/onama" element={<ONama />} />
                     <Route path="/letovi" element={<Letovi />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/moji-letovi" element={<MojiLetovi />} />
+                    <Route path="/admin" element={<Admin />} />
                 </Routes>
             </BrowserRouter>
       </Container>
