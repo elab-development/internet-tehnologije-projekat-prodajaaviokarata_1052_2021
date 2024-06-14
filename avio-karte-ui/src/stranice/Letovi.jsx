@@ -14,6 +14,27 @@ const Letovi = () => {
     const [aerodromOd, setAerodromOd] = React.useState("");
     const [aerodromDo, setAerodromDo] = React.useState("");
 
+    const ulogovan = window.sessionStorage.getItem('token') !== null;
+    const user = ulogovan ? JSON.parse(window.sessionStorage.getItem('user')) : null;
+
+    let danas = new Date();
+    let formatiranDanas = danas.getFullYear() + "-" + (danas.getMonth() + 1) + "-" + danas.getDate();
+
+    const kupiKartu = (id) => {
+        let data = {
+            let_id: id,
+            user_id: user.id,
+            vreme_rezervacije : formatiranDanas
+        }
+        axiosZahtev.post("/rezervacije", data)
+            .then(res => {
+                console.log(res.data);
+                window.location = "/moji-letovi";
+            }).catch(err => {
+                console.log(err);
+        })
+    }
+
 
     const pretraziLetove = () => {
         let letoviFiltrirani = letovi.filter(lett => {
@@ -135,6 +156,11 @@ const Letovi = () => {
                                 <th>Vreme dolaska</th>
                                 <th>Broj karata</th>
                                 <th>Cena karte</th>
+                                {
+                                    ulogovan && (
+                                        <th>Kupi kartu</th>
+                                    )
+                                }
                             </tr>
                             </thead>
                             <tbody>
@@ -149,6 +175,18 @@ const Letovi = () => {
                                             <td>{lett.vreme_dolaska}</td>
                                             <td>{lett.broj_karata}</td>
                                             <td>{lett.cena_karte} &euro;</td>
+                                            {
+                                                ulogovan && (
+                                                    <td>
+                                                        <button onClick={
+                                                            () => {
+                                                                kupiKartu(lett.id)
+                                                            }
+                                                        } className="btn btn-primary">Kupi kartu</button>
+                                                    </td>
+                                                )
+
+                                            }
                                         </tr>
                                     );
                                 })
