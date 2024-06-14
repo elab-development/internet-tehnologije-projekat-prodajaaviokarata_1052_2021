@@ -117,8 +117,8 @@ class RezervacijaController extends AbstractController
     
     public function rezervacijeKorisnika($id)
     {
-        $rezervacije = Rezervacija::where('user_id', $id)->get();
-        return $this->uspesanOdgovor(RezervacijaResurs::collection($rezervacije));
+        $rezervacije = Rezervacija::where('user_id', $id)->paginate(10);
+        return $this->uspesanOdgovor($rezervacije);
     }
     
     //paginate
