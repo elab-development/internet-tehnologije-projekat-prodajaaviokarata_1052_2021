@@ -3,6 +3,7 @@ import Naslov from "../komponente/Naslov";
 import {Chart} from "react-google-charts";
 import axiosZahtev from "../axiosZahtev";
 import {Col, Row, Table} from "react-bootstrap";
+import {CSVDownload, CSVLink} from "react-csv";
 
 const Admin = () => {
     const [poruka, setPoruka] = React.useState("");
@@ -11,6 +12,8 @@ const Admin = () => {
         title: 'Broj polazaka po aerodromima',
         is3D: true
     });
+
+    const [csvData, setCsvData] = React.useState([]);
 
     useEffect(() => {
         axiosZahtev.get("/grafik")
@@ -32,6 +35,11 @@ const Admin = () => {
         axiosZahtev.get("/nove-rezervacije")
             .then(res => {
                 setNoveRezervacije(res.data.podaci);
+                let csv = [["ID", "Let ID", "Vreme rezervacije", "Status"]];
+                res.data.podaci.forEach(r => {
+                    csv.push([r.id, r.let.id, r.vreme_rezervacije, r.status]);
+                });
+                setCsvData(csv);
             }).catch(err => {
             console.log(err);
         })
@@ -87,7 +95,7 @@ const Admin = () => {
                                     return (
                                         <tr key={lett.id}>
                                             <td>{lett.id}</td>
-                                            <td>{lett.let_id}</td>
+                                            <td>{lett.let.id}</td>
                                             <td>{lett.vreme_rezervacije}</td>
                                             <td>{lett.status}</td>
                                             <td>
@@ -105,6 +113,12 @@ const Admin = () => {
                             </tbody>
                         </Table>
                     </Col>
+                </Row>
+
+                <Row>
+                    <div className="download">
+                        <CSVLink data={csvData}>Downloaduj podatke</CSVLink>
+                    </div>
                 </Row>
             </div>
         </>
