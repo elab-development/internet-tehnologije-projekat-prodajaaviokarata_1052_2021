@@ -35,9 +35,14 @@ const Footer = () => {
                         <div className="col-md-4">
                             <h1>{vreme}</h1>
                         </div>
-
+                    
                         <div className="col-md-4">
-                            <span>Made with love <FaHeart/></span>
+                        <ul>
+                            <li>Jednostavna Rezervacija</li>
+                            <li>Konkurentne Cene</li>
+                            <li>Širok Izbor Destinacija</li>
+                            <li>Sigurnost i Pouzdanost</li>
+                    </ul>
                         </div>
                     </div>
                 </div>
